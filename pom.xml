@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.pmcautobump</groupId>
+    <artifactId>PMCAutoBumper</artifactId>
+    <version>0.1</version>
+
+    <name>PMCAutoBumper</name>
+    <description>A plugin that allows PMC to be bumped automatically.</description>
+
+    <repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bukkit_version>1.6.2-R0.2-SNAPSHOT</bukkit_version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>${bukkit_version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
+            <version>${bukkit_version}</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.12</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <directory>${basedir}/target</directory>
+        <finalName>${project.name}</finalName>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>${project.name}</finalName>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.bukkit:bukkit</exclude>
+                                    <exclude>org.bukkit:craftbukkit</exclude>
+                                </excludes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
