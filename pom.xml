@@ -80,6 +80,8 @@
                                 <excludes>
                                     <exclude>org.bukkit:bukkit</exclude>
                                     <exclude>org.bukkit:craftbukkit</exclude>
+                                    <!-- Apache must be explicitly excluded because HTMLUnit shades it in even though craftbukkit already has it. -->
+                                    <exclude>org.apache.commons:commons-lang3</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
